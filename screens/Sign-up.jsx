@@ -1,9 +1,15 @@
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, KeyboardAvoidingView, ScrollView } from 'react-native'
-import React from 'react';
+import React, { useState } from 'react';
 import moon from "../assets/moon.png"
 
 
-const SignUp = () => {
+const SignUp = ({navigation}) => {
+    // Variables for the sign up form
+    const [name, setName] = useState();
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+
+    
   return (
     <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}  style={styles.main__container}>
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -11,7 +17,7 @@ const SignUp = () => {
             <TouchableOpacity style={styles.signUpcontainer}>
                 <Text style={styles.signUpText}>Sign up </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.signInContainer}>
+            <TouchableOpacity style={styles.signInContainer} onPress={() => navigation.replace('Sign-in')}>
                 <Text style={styles.signInText}>Sign in </Text>
             </TouchableOpacity>
         </View>
@@ -20,18 +26,18 @@ const SignUp = () => {
             <Text style={styles.subheader__text}>Join us on your path to the moon</Text>
             <View style={styles.input__container}>
                 <Text style={styles.input__text}>Your name</Text>
-                <TextInput style={styles.input}></TextInput>
+                <TextInput style={styles.input} placeholder='name' value={name} onChange={text => setName(text)}></TextInput>
             </View>
             <View style={styles.input__container}>
-                <Text style={styles.input__text}>Email</Text>
-                <TextInput style={styles.input}></TextInput>
+                <Text style={styles.input__text} >Email</Text>
+                <TextInput style={styles.input} placeholder='name@gmail.com' value={email} onChange={text => setEmail(text)}></TextInput>
             </View>
             <View style={styles.input__container}>
                 <Text style={styles.input__text}>Password</Text>
-                <TextInput style={styles.input}></TextInput>
+                <TextInput secureTextEntry style={styles.input} placeholder="******************" value={password} onChange={text => setPassword(text)}></TextInput>
             </View>
             <TouchableOpacity style={styles.submit}>
-                <Text style={styles.submit__text}>Sign up </Text>
+                <Text style={styles.submit__text}>Sign up</Text>
             </TouchableOpacity>
         </View>
         <View style={styles.moon__container}>
@@ -105,7 +111,8 @@ const styles = StyleSheet.create({
     input__text : {
         fontSize: 24, 
         fontWeight: '600',
-        color: 'black'
+        color: 'black',
+        marginBottom: -10
     },
     input : {
         borderWidth: 5,
@@ -119,7 +126,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20
     },
     submit: {
-        backgroundColor: '#C4FAEA',
+        backgroundColor: '#D1DBFC',
         borderWidth: 5,
         borderRadius: 80,
         paddingVertical: 7,
@@ -137,11 +144,11 @@ const styles = StyleSheet.create({
         overflow: 'hidden', 
         marginBottom: -50, 
         marginLeft: -50,
-        width: 250,
+        width: 300,
       
     }, 
     moon : {
-        height: 250,
-        width: 250
+        height: 300,
+        width: 300
     }
 })
