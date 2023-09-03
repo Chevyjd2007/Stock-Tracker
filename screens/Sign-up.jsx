@@ -1,34 +1,32 @@
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, KeyboardAvoidingView, ScrollView } from 'react-native'
 import React from 'react';
 import moon from "../assets/moon.png"
 
+
 const SignUp = () => {
   return (
-    <View style={styles.main__container}>
+    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}  style={styles.main__container}>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View style={styles.container}>
-        <TouchableOpacity style={styles.signUpcontainer}>
-            <Text style={styles.signUpText}>Sign up </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.signInContainer}>
-            <Text style={styles.signInText}>Sign in </Text>
-        </TouchableOpacity>
+            <TouchableOpacity style={styles.signUpcontainer}>
+                <Text style={styles.signUpText}>Sign up </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.signInContainer}>
+                <Text style={styles.signInText}>Sign in </Text>
+            </TouchableOpacity>
         </View>
         <View style={styles.form__container}>
-            <View style={styles.header__container}>
-                <Text style={styles.header__text}>Sign Up</Text>
-            </View>
-            <View style={styles.subheading__container}>
-                <Text style={styles.subheader__text}>Join us on your path to the moon</Text>
-            </View>
-            <View style={styles.name__container}>
+            <Text style={styles.header__text}>Sign Up</Text>
+            <Text style={styles.subheader__text}>Join us on your path to the moon</Text>
+            <View style={styles.input__container}>
                 <Text style={styles.input__text}>Your name</Text>
                 <TextInput style={styles.input}></TextInput>
             </View>
-            <View style={styles.email__container}>
+            <View style={styles.input__container}>
                 <Text style={styles.input__text}>Email</Text>
                 <TextInput style={styles.input}></TextInput>
             </View>
-            <View style={styles.password__container}>
+            <View style={styles.input__container}>
                 <Text style={styles.input__text}>Password</Text>
                 <TextInput style={styles.input}></TextInput>
             </View>
@@ -39,7 +37,8 @@ const SignUp = () => {
         <View style={styles.moon__container}>
             <Image source={moon} style={styles.moon}/>
         </View>
-    </View>
+        </ScrollView>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -54,7 +53,7 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'space-around',
         alignItems: 'flex-start',
-        flex: 1,
+        flex: 0,
         flexDirection: 'row',
         
     },
@@ -86,46 +85,22 @@ const styles = StyleSheet.create({
         fontWeight: '600'
     },
     form__container : {
-        flex: 7,
+        flex: 10,
         flexDirection: 'column',
-        justifyContent: 'flex-start',
+        justifyContent: 'flex-start',   
         alignItems: 'center'
-    },
-    header__container: {
-        flex: 1,
     },
     header__text: {
         fontSize: 56,
         fontWeight: '800',
         color: 'black',
     },
-    subheading__container: {
-        flex: 1,
-        position: 'absolute',
-        top: 80,
-    }, 
     subheader__text: {
         fontSize: 20,
         color: 'black',
     },
-    name__container : {
-        flex: 1,
-        position: 'absolute',
-        top: 130,
-        left: 55,
-        
-    },
-    email__container : {
-        flex: 1,
-        position: 'absolute',
-        top: 250,
-        left: 55,
-    },
-    password__container : {
-        flex: 1,
-        position: 'absolute',
-        top: 370,
-        left: 55,
+    input__container : {
+        paddingTop: 20
     },
     input__text : {
         fontSize: 24, 
@@ -133,14 +108,15 @@ const styles = StyleSheet.create({
         color: 'black'
     },
     input : {
-        width: 100,
         borderWidth: 5,
         borderColor: 'black',
         height: 50,
         width: 300,
         marginTop: 14,
         marginLeft: -20,
-        borderRadius: 80
+        borderRadius: 80,
+        fontSize: 25,
+        paddingHorizontal: 20
     },
     submit: {
         backgroundColor: '#C4FAEA',
@@ -148,8 +124,8 @@ const styles = StyleSheet.create({
         borderRadius: 80,
         paddingVertical: 7,
         paddingHorizontal: 27,
-        bottom: 160,
-        left: 60
+        marginTop: 20,
+        marginLeft: 110,
     },
     submit__text: {
         color: 'black',
@@ -157,9 +133,12 @@ const styles = StyleSheet.create({
         fontWeight: '600'
     },
     moon__container : {
-        position: 'absolute',
-        bottom: -50,
-        left: -50
+        alignItems: 'flex-start',
+        overflow: 'hidden', 
+        marginBottom: -50, 
+        marginLeft: -50,
+        width: 250,
+      
     }, 
     moon : {
         height: 250,
